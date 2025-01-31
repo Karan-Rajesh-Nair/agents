@@ -210,6 +210,7 @@ class LLM(llm.LLM):
         model: str | MistralChatModels = "mistral-large-latest",
         api_key: str | None = None,
         base_url: str | None = "https://api.mistral.ai/v1",
+        client: openai.AsyncClient | None = None,
         user: str | None = None,
         temperature: float | None = None,
         parallel_tool_calls: bool | None = None,
@@ -232,12 +233,12 @@ class LLM(llm.LLM):
             model=model,
             api_key=api_key,
             base_url=base_url,
+            client=client,
             user=user,
             temperature=temperature,
             parallel_tool_calls=parallel_tool_calls,
             tool_choice=tool_choice,
         )
-        mistral_llm._capabilities = llm.LLMCapabilities(supports_stream_options=False)
         return mistral_llm
 
     @staticmethod
